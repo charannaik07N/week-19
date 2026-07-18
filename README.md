@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RapidDispatch Live Ops Helpdesk 🚚
 
-## Getting Started
+RapidDispatch is an enterprise-grade, native-feeling logistics helpdesk dashboard designed for fast-paced operational environments. It allows dispatchers, support agents, and fleet managers to track live tickets, monitor real-time activity, and manage resources efficiently.
 
-First, run the development server:
+## 🌟 Key Features
+
+*   **Enterprise UX Redesign**: A modern, dense, and premium interface built for professionals working 8+ hours a day (inspired by Linear, Stripe, and Jira Premium).
+*   **Mobile-First Native Feel**: The application is fully optimized for mobile devices, respecting safe-areas and using native application interaction patterns (Slide-over drawers, Bottom Sheets, Full-screen search overlays) rather than clunky responsive web paradigms. Zero horizontal scrolling.
+*   **Live Ticket Queue**: Real-time filtering, pagination, and sorting for operational tickets.
+*   **Master-Detail Flow**: Advanced split-view ticket resolution system with real-time lock management to prevent agent collisions.
+*   **Activity Center**: Live feed of operational activities, escalations, and system alerts.
+*   **Dark Mode**: Native `next-themes` integration for instant, flash-free light/dark mode toggling, fully compatible with Tailwind CSS v4.
+
+## 🛠️ Technology Stack
+
+*   **Framework**: [Next.js 16 (App Router)](https://nextjs.org) with React 19
+*   **Styling**: [Tailwind CSS v4](https://tailwindcss.com) (Inline theme configuration, custom dark variants)
+*   **State Management**: [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) (Modular stores for UI, Tickets, Agents, and Notifications)
+*   **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
+*   **Icons**: [Lucide React](https://lucide.dev/)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+
+## 🚀 Getting Started
+
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project follows a feature-based architecture for enterprise scalability:
 
-## Learn More
+```
+src/
+├── app/                  # Next.js App Router pages and layouts
+├── features/             # Feature-specific domains
+│   ├── activity/         # Live Activity Center
+│   ├── dashboard/        # KPI Cards and Main Dashboard
+│   ├── notifications/    # Toast and Notification System
+│   ├── settings/         # User and Workspace Settings
+│   ├── team/             # Team Directory and Workloads
+│   └── tickets/          # Core Ticket Resolution Engine (Queue, Details)
+├── shared/               # Globally shared resources
+│   ├── components/       # Reusable UI components (Buttons, Badges, Layouts)
+│   ├── constants/        # Mock data, routes, and enumerations
+│   ├── lib/              # Utility configurations (TanStack setup)
+│   ├── store/            # Global Zustand stores
+│   └── utils/            # Helper functions (date formatting, cn)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📱 Mobile Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+RapidDispatch enforces strict mobile constraints to simulate a native app environment:
+*   `max-w-[100vw]` and `overflow-x-hidden` guarantees no horizontal drift.
+*   Next.js Viewport strictly prevents user-scaling (`userScalable: false`).
+*   All interactive elements (buttons, checkboxes, tabs) comply with Apple's HIG minimum `44x44px` touch target requirements.
+*   Sticky action bars dynamically calculate CSS padding via `env(safe-area-inset-bottom)` to protect against home-indicator collision.
