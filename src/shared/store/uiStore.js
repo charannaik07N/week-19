@@ -22,6 +22,10 @@ export const useUIStore = create((set) => ({
   setMobileSidebarOpen: (isOpen) => set({ isMobileSidebarOpen: isOpen }),
   toggleMobileSidebar: () => set((state) => ({ isMobileSidebarOpen: !state.isMobileSidebarOpen })),
 
+  isActivityDrawerOpen: false,
+  setActivityDrawerOpen: (isOpen) => set({ isActivityDrawerOpen: isOpen }),
+  toggleActivityDrawer: () => set((state) => ({ isActivityDrawerOpen: !state.isActivityDrawerOpen })),
+
   openModal: (modalId, props = {}) => set({ activeModal: modalId, modalProps: props }),
   closeModal: () => set({ activeModal: null, modalProps: {} }),
 }));

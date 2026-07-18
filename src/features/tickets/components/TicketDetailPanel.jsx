@@ -14,6 +14,7 @@ import { formatTicketNumber, formatDateTime } from '@/shared/utils';
 import { 
   Lock, 
   Unlock, 
+  FilePlus,
   Send, 
   Paperclip, 
   MoreVertical,
@@ -49,12 +50,33 @@ export default function TicketDetailPanel() {
 
   if (!ticket) {
     return (
-      <div className="flex-1 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center justify-center">
-        <EmptyState 
-          icon={FileText} 
-          title="No Ticket Selected" 
-          description="Select a ticket from the queue to view details and collaborate." 
-        />
+      <div className="flex-1 bg-slate-50/50 dark:bg-slate-900/20 flex flex-col items-center justify-center p-8 overflow-y-auto min-w-0">
+        <div className="max-w-md w-full space-y-6">
+          <div className="text-center">
+            <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4 border border-blue-200 dark:border-blue-800">
+              <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No Ticket Selected</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm">
+              Select a ticket from the queue to view its details, or use one of the quick actions below to get started.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <button className="flex flex-col items-center p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+              <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-900/50 mb-3 transition-colors">
+                <FilePlus className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+              </div>
+              <span className="font-medium text-slate-900 dark:text-white text-sm">Create Ticket</span>
+            </button>
+            <button className="flex flex-col items-center p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+              <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-900/50 mb-3 transition-colors">
+                <AlertTriangle className="w-5 h-5 text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+              </div>
+              <span className="font-medium text-slate-900 dark:text-white text-sm">View Critical</span>
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -67,7 +89,7 @@ export default function TicketDetailPanel() {
   const driver = { name: 'John Doe', phone: '+1 555-0198', status: 'On Duty' };
 
   return (
-    <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden lg:min-w-[700px] w-full relative">
+    <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden min-w-0 relative">
       
       {/* Mobile Back Button */}
       <div className="lg:hidden p-2 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shrink-0">

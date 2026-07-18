@@ -7,12 +7,12 @@ import { useUIStore } from '@/shared/store/uiStore';
 import { useAgentStore } from '@/shared/store/agentStore';
 import ConnectionIndicator from '@/shared/components/ui/ConnectionIndicator';
 import Avatar from '@/shared/components/ui/Avatar';
-import { Bell, Sun, Moon, Search, Menu, X } from 'lucide-react';
+import { Bell, Sun, Moon, Search, Menu, X, Activity } from 'lucide-react';
 import { cn } from '@/shared/utils';
 
 export default function TopNav() {
   const pathname = usePathname();
-  const { toggleMobileSidebar } = useUIStore();
+  const { toggleMobileSidebar, toggleActivityDrawer } = useUIStore();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const currentAgent = useAgentStore((s) => s.currentAgent);
@@ -70,8 +70,19 @@ export default function TopNav() {
             <ConnectionIndicator />
           </div>
           
-          <div className="hidden sm:flex items-center gap-1 border-l border-slate-200 dark:border-slate-800 pl-3">
-            <button className="relative flex items-center justify-center w-11 h-11 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+          <div className="flex items-center gap-1 border-l border-slate-200 dark:border-slate-800 pl-3 ml-3 sm:ml-0">
+            {/* Activity Toggle (Hidden on Desktop grid view) */}
+            <button 
+              onClick={toggleActivityDrawer}
+              className="lg:hidden relative flex items-center justify-center w-11 h-11 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/50 rounded-md transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              aria-label="Toggle Live Activity"
+            >
+              <Activity size={20} />
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full" />
+            </button>
+
+            {/* Notifications */}
+            <button className="hidden sm:flex relative items-center justify-center w-11 h-11 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
               <Bell size={20} />
               <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full" />
             </button>

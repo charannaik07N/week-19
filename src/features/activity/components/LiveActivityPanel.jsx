@@ -17,12 +17,16 @@ const iconMap = {
   attachment_uploaded: FilePlus,
 };
 
+import { useUIStore } from '@/shared/store/uiStore';
+import Drawer from '@/shared/components/ui/Drawer';
+
 export default function LiveActivityPanel() {
   const activities = MOCK_ACTIVITIES; // Replace with useActivityStore().activities
+  const { isActivityDrawerOpen, setActivityDrawerOpen } = useUIStore();
 
-  return (
-    <div className="flex-1 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col min-h-0 overflow-hidden">
-      <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
+  const content = (
+    <div className="flex flex-col h-full overflow-hidden bg-white dark:bg-slate-900 rounded-xl lg:rounded-none shadow-sm lg:shadow-none border border-slate-200 dark:border-slate-800 lg:border-none min-w-0">
+      <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50 shrink-0">
         <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
           <Activity size={16} className="text-blue-500" />
           Live Activity
@@ -63,5 +67,26 @@ export default function LiveActivityPanel() {
         })}
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Grid Layout */}
+      <div className="hidden lg:flex flex-col h-full w-full border-l border-slate-200 dark:border-slate-800 overflow-hidden">
+        {content}
+      </div>
+
+      {/* Tablet/Mobile Drawer Layout */}
+      <div className="lg:hidden">
+        <Drawer 
+          isOpen={isActivityDrawerOpen} 
+          onClose={() => setActivityDrawerOpen(false)} 
+          title="Live Activity"
+          width="w-[320px] max-w-[90vw]"
+        >
+          {content}
+        </Drawer>
+      </div>
+    </>
   );
 }

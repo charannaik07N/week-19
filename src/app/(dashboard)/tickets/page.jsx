@@ -10,11 +10,11 @@ export default function TicketsPage() {
   const selectedTicketId = useTicketStore((s) => s.selectedTicketId);
 
   return (
-    <div className="h-full flex overflow-hidden bg-slate-50 dark:bg-slate-900 relative">
+    <div className="h-full grid overflow-hidden bg-slate-50 dark:bg-slate-900 relative grid-cols-1 md:grid-cols-[340px_1fr] lg:grid-cols-[340px_1fr_320px] min-[1440px]:grid-cols-[380px_1fr_360px]">
       <div 
         className={cn(
-          "flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden flex-col w-full lg:w-[360px]",
-          selectedTicketId ? "hidden lg:flex" : "flex"
+          "border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden flex-col h-full min-w-0",
+          selectedTicketId ? "hidden md:flex" : "flex"
         )}
       >
         <TicketQueue />
@@ -22,16 +22,16 @@ export default function TicketsPage() {
       
       <div 
         className={cn(
-          "flex-1 lg:min-w-[700px] overflow-hidden flex-col bg-white dark:bg-slate-900 w-full",
-          selectedTicketId ? "flex" : "hidden lg:flex"
+          "overflow-hidden flex-col bg-slate-50 dark:bg-slate-900 h-full min-w-0",
+          selectedTicketId ? "flex" : "hidden md:flex"
         )}
       >
         <TicketDetailPanel />
       </div>
 
-      <div className="hidden xl:flex w-[360px] flex-shrink-0 border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden flex-col">
-        <LiveActivityPanel />
-      </div>
+      <LiveActivityPanel />
+      
+      {/* Mobile/Tablet Drawer Activity Panel is rendered independently inside LiveActivityPanel component */}
     </div>
   );
 }
